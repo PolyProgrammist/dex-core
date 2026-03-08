@@ -88,7 +88,7 @@
         force_chain(WORKCHAIN, token_wallet1, WRONG_WORKCHAIN);
 
         ;; check if the call is valid
-        if ((fwd_fee * 6 >  msg_value) | equal_slices(sender_address, token_wallet1) | storage::is_locked) {
+        if ((fwd_fee * 6 >  msg_value) | equal_slices(sender_address, token_wallet1) | storage::is_locked | ((transferred_op != swap) & (transferred_op != provide_lp))) {
             ;; refund jettons
             var body = create_simple_transfer_body(query_id, 0, jetton_amount, from_user);
             if (storage::is_locked) {
